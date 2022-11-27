@@ -46,9 +46,9 @@ function manageParticleLife() {
 function genParticles() {
     for (let i = 0; i < heartPath.length; i++){
         let heartPoint = heartPath[i];
-        let p = 0.03
+        let p = 0.02
         if ( Math.abs(heartPoint.x - width/2) < 5) {
-            p =0.01
+            p =0.005
         }
         if(Math.abs(heartPoint.x - width/2) < 2) {
             p = 0
