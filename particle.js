@@ -29,7 +29,6 @@ function drawParticle() {
     moveParticle()
     // 绘制粒子
     drawParticles()
-    // console.log("心路径",heartPath)
 }
 
 

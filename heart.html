@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>宝宝的♥</title>
+    <link rel="stylesheet" href="reset.css">
+</head>
+
+<body style="background-color: #000">
+<canvas height="450" id="demo" width="450"></canvas>
+</body>
+
+<style>
+    #demo {
+        border: 1px #111 solid;
+        border: 0;
+    }
+</style>
+<script src="particle.js"></script>
+<script>
+    // 变量定义
+    const canvas = document.getElementById('demo')
+    const sketchContext = canvas.getContext('2d')
+    const height = 450
+    const width = 450
+    let heartSize = width / 40; // 大小比率 自适应
+    let heartBeatSizeChange = 1;
+    const fps = 60; // 帧率
+    const frameRefreshTime = 1000 / fps; // 刷新时间间隔
+    // 计算心形的路径
+    let heartPath = getHeartPath()
+
+    function startMovie() {
+        setInterval(draw, frameRefreshTime);
+    }
+
+    function draw() {
+        clearSketch()
+        // 心跳系统
+        heartBeat()
+        drawHeart()
+        // 添加粒子系统
+        drawParticle()
+    }
+
+
+    function clearSketch() {
+        sketchContext.clearRect(0, 0, width, height)
+        sketchContext.fillStyle = "#000"
+        sketchContext.fillRect(0, 0, width, height)
+    }
+
+    function getHeartPath() {
+        const t = []
+        let t0 = -10
+        while (true) {
+            t.push(t0)
+            t0 += 0.005
+            if (t0 > 10) break;
+        }
+        const heartPath = []
+        t.forEach((t1) => {
+            let x1 = -(heartSize + heartBeatSizeChange*0.5) * (16 * Math.pow(Math.sin(t1), 3)) + width / 2
+            let y1 = -(heartSize + heartBeatSizeChange*0.5) * (13 * Math.cos(t1) - 5 * Math.cos(2 * t1) - 2 * Math.cos(3 * t1) - Math.cos(4 * t1)) + height / 2
+            const point = {x: x1, y: y1}
+            heartPath.push(point)
+        })
+        return heartPath
+    }
+
+    function drawHeart() {
+        let heartPath = getHeartPath()
+        sketchContext.fillStyle = "rgb(231,76,60)"
+        // sketchContext.lineWidth = 5
+        // sketchContext.beginPath()
+        // sketchContext.moveTo(heartPath[0].x, heartPath[0].y)
+        // heartPath.forEach(eachPoint => {
+        //     sketchContext.lineTo(eachPoint.x, eachPoint.y)
+        // })
+        // sketchContext.stroke()
+        let tempWidth = 18
+        heartPath.forEach(eachPoint => {
+            // if(Math.random() <0.1){
+            //     return
+            // }
+            let tempDy = Math.random()*tempWidth - tempWidth/2
+            let p = (tempWidth/2 - tempDy) / tempWidth*2
+            if(Math.random() > p) {
+                return;
+            }
+            sketchContext.fillRect(eachPoint.x, eachPoint.y + tempDy,particleSize ,particleSize)
+
+        })
+    }
+
+    let sizeChangeRad = 0
+    let frameCount = 0
+    let heartBeatTime = 1
+    function heartBeat() {
+        frameCount ++
+        frameCount = frameCount % (fps * heartBeatTime)
+        sizeChangeRad = Math.PI * 2 * ( frameCount/(fps* heartBeatTime))
+        heartBeatSizeChange = Math.cos(sizeChangeRad)
+    }
+
+    window.onload = startMovie()
+</script>
+</html>
