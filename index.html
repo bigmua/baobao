@@ -2,35 +2,52 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>宝宝的❤</title>
+    <title>新❤瑶</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
-    <link rel="stylesheet" href="reset.css">
+    <link href="reset.css" rel="stylesheet">
+    <link href="favicon.png" rel="shortcut icon" type="image/x-icon">
+    <link href="https://unpkg.com/nes.css@2.3.0/css/nes.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="lib/cartoonfont.css">
+    <link href="/lib/onepage-scroll/onepage-scroll.css" rel="stylesheet">
+    <script src="lib/jquery-1.12.4.min.js"></script>
+    <script src="/lib/onepage-scroll/jquery.onepage-scroll.min.js"></script>
 </head>
 <body>
-<div class="heartBox">
-    <div class="heart">
-        <iframe src="heart.html" frameborder="0"></iframe>
-    </div>
+<div class="multi-page">
+    <section>
+       <div style="height: 100%;background-color:#000;">
+           <div  style="background-color:#fff;">
+               <div style="display: flex;flex-direction: row; justify-content: center">
+                   <progress  style="max-width: 1080px" class="nes-progress is-pattern" value="30" max="100"></progress>
+               </div>
+           </div>
+           <div class="heartBox" style="background-color:#000;">
+               <div style="width: 100%; height: 450px; position: absolute;z-index: 9999;opacity: 0"></div>
+               <div class="heart" style="display: flex;flex-direction: row; justify-content: center">
+                   <div>
+                       <iframe height="450" id="heartCanvas" src="heart.html" style="" width="450"></iframe>
+                       <div id="loveDays" style="text-align: center">love for <span>?</span> days!</div>
+                   </div>
+               </div>
+           </div>
+       </div>
+    </section>
+    <section>
+
+    </section>
 </div>
+
 <style>
-    html, body{
-        background-color: #000;
+    html, body {
+        background-color: #fff;
     }
-    .heartBox{
-        width: 100%;
-        position: relative;
-    }
-    .heart{
-        position: absolute;
-        left: 50%;
-        margin-left: -225px;
-    }
-    .heartBox iframe {
-        width: 450px;
-        height: 450px;
-        overflow: hidden;
+
+    #loveDays {
+        color: #fff;
     }
 </style>
+<script src="lib/vue.global.js"></script>
+
+<script src="main.js"></script>
 </body>
 </html>

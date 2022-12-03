@@ -66,6 +66,7 @@ function moveParticle() {
         eachParticle.y = eachParticle.y + eachParticle.dy
         eachParticle.opacity = eachParticle.opacity * (1- eachParticle.frameCount / (maxParticleLiveTime* fps))
     })
+    particleList = particleList.filter(eachParticle=> eachParticle.opacity>0.1)
 }
 
 function drawParticles() {

@@ -9,15 +9,17 @@
 </head>
 
 <body style="background-color: #000">
-<canvas height="450" id="demo" width="450"></canvas>
+<canvas id="demo"></canvas>
 </body>
 
 <style>
     #demo {
         border: 0;
     }
-    html, body{
+    html, body,canvas{
         overflow: hidden;
+        height: 450px;
+
     }
 </style>
 <script src="particle.js"></script>
@@ -26,7 +28,12 @@
     const canvas = document.getElementById('demo')
     const sketchContext = canvas.getContext('2d')
     const height = 450
-    const width = 450
+    let width = window.screen.width
+    if(width>450){
+        width = 450
+    }
+    document.querySelector("#demo").width = width
+    document.querySelector("#demo").height = height
     let heartSize = width / 40; // 大小比率 自适应
     let heartBeatSizeChange = 1;
     const fps = 60; // 帧率
@@ -49,9 +56,9 @@
 
 
     function clearSketch() {
-        sketchContext.clearRect(0, 0, width, height)
+        sketchContext.clearRect(0, 0, 450, height)
         sketchContext.fillStyle = "#000"
-        sketchContext.fillRect(0, 0, width, height)
+        sketchContext.fillRect(0, 0, 450, height)
     }
 
     function getHeartPath() {
@@ -75,21 +82,11 @@
     function drawHeart() {
         let heartPath = getHeartPath()
         sketchContext.fillStyle = "rgb(231,76,60)"
-        // sketchContext.lineWidth = 5
-        // sketchContext.beginPath()
-        // sketchContext.moveTo(heartPath[0].x, heartPath[0].y)
-        // heartPath.forEach(eachPoint => {
-        //     sketchContext.lineTo(eachPoint.x, eachPoint.y)
-        // })
-        // sketchContext.stroke()
         let tempWidth = 18
         heartPath.forEach(eachPoint => {
-            // if(Math.random() <0.1){
-            //     return
-            // }
             let tempDy = Math.random()*tempWidth - tempWidth/2
             let p = (tempWidth/2 - tempDy) / tempWidth*2
-            if(Math.random() > p) {
+            if(Math.random()*2 > p) {
                 return;
             }
             sketchContext.fillRect(eachPoint.x, eachPoint.y + tempDy,particleSize ,particleSize)
