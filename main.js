@@ -36,7 +36,7 @@ $(function () {
 
     let prograss  = 30
     setInterval(()=>{
-        prograss= (prograss + 2 ) % 100
+        prograss= (prograss + 0.5 ) % 100
         $("progress").attr("value",prograss)
-    },100)
+    },25)
 })
